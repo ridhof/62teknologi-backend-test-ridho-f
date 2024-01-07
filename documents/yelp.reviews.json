@@ -1,0 +1,56 @@
+{
+  "reviews": [
+    {
+      "id": "4fFdDLB6FwnwOYvRbkQ0Kw",
+      "url": "https://www.yelp.com/biz/best-bagel-and-coffee-new-york?adjust_creative=ls3OVnYehsY3vMDuv-Ocog&hrid=4fFdDLB6FwnwOYvRbkQ0Kw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=ls3OVnYehsY3vMDuv-Ocog",
+      "text": "I don't know if I'd call it the best bagel, but I'll be damned if there wasn't at least 6oz of thinly sliced smoked salmon in my everything with veggie...",
+      "rating": 5,
+      "time_created": "2024-01-01 13:50:17",
+      "user": {
+        "id": "rcU7ysY41qGppbw4pQgjqg",
+        "profile_url": "https://www.yelp.com/user_details?userid=rcU7ysY41qGppbw4pQgjqg",
+        "image_url": "https://s3-media4.fl.yelpcdn.com/photo/hbiOmKOyLsIub4vk8dmcnw/o.jpg",
+        "name": "Damien S."
+      }
+    },
+    {
+      "id": "sRp3dxZvvx8Eut-ecJpsiw",
+      "url": "https://www.yelp.com/biz/best-bagel-and-coffee-new-york?adjust_creative=ls3OVnYehsY3vMDuv-Ocog&hrid=sRp3dxZvvx8Eut-ecJpsiw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=ls3OVnYehsY3vMDuv-Ocog",
+      "text": "We hastily got bagels before our musical, and this place was a delightful surprise.\n \nI got some sort of Katsu bagel sandwich with all the veggies and...",
+      "rating": 5,
+      "time_created": "2023-12-31 14:30:39",
+      "user": {
+        "id": "W8EfRUNj-GXmGRVNzyOPbw",
+        "profile_url": "https://www.yelp.com/user_details?userid=W8EfRUNj-GXmGRVNzyOPbw",
+        "image_url": "https://s3-media1.fl.yelpcdn.com/photo/t2UP7ECHMp7OK2weluIAEA/o.jpg",
+        "name": "Julia Y."
+      }
+    },
+    {
+      "id": "wTim2IzzvvpmBxHDEKStaA",
+      "url": "https://www.yelp.com/biz/best-bagel-and-coffee-new-york?adjust_creative=ls3OVnYehsY3vMDuv-Ocog&hrid=wTim2IzzvvpmBxHDEKStaA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=ls3OVnYehsY3vMDuv-Ocog",
+      "text": "Loved this bagel spot the best! It had many decent options, but I got the egg, bacon, cheese bagel sandwich. I thought it was the best tasting bagel spot in...",
+      "rating": 5,
+      "time_created": "2023-12-27 16:27:45",
+      "user": {
+        "id": "oz3E_ltsmX6RZ-lZv6U86A",
+        "profile_url": "https://www.yelp.com/user_details?userid=oz3E_ltsmX6RZ-lZv6U86A",
+        "image_url": "https://s3-media1.fl.yelpcdn.com/photo/B5AsJzSIvG-x7EQHBmI1rA/o.jpg",
+        "name": "Kyle M."
+      }
+    }
+  ],
+  "total": 4681,
+  "possible_languages": [
+    "en",
+    "fr",
+    "ja",
+    "zh",
+    "es",
+    "de",
+    "pt",
+    "da",
+    "nl",
+    "it"
+  ]
+}
