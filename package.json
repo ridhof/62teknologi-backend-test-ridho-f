@@ -1,0 +1,18 @@
+{
+  "name": "bizsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+	"dbml:render": "dbml-renderer -i ./documents/database.dbml -o ./documents/database.svg",
+	"dbml:validate": "dbdocs validate ./documents/database.dbml",
+	"test": "pnpm dbml:validate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@softwaretechnik/dbml-renderer": "1.0.27",
+    "dbdocs": "0.8.4"
+  }
+}
