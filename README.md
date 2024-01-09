@@ -13,13 +13,11 @@ An API server to manage and find businesses and reviews
 ## Todo
 
 - [X] Design database schema
-- [ ] Design APIs
-- [ ] Initiate Backend
-- [ ] Finish Backend
-	- [ ] Database Migrations
-	- [ ] Database Seeding
-	- [ ] Database Query
-	- [ ] APIs
+- [X] Design APIs
+- [ ] Database Migrations
+- [ ] Database Seeding
+- [ ] Database Query
+- [ ] APIs
 
 ## Setup
 
