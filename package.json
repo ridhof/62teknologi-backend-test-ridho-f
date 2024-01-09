@@ -6,6 +6,9 @@
   "scripts": {
 	"dbml:render": "dbml-renderer -i ./documents/database.dbml -o ./documents/database.svg",
 	"dbml:validate": "dbdocs validate ./documents/database.dbml",
+	"docker:down": "rm -rf ./db-data && docker compose down -v",
+	"docker:up": "docker compose up -d",
+	"docker:psql": "docker exec -it bizsearch-database-1 psql -U postgres",
 	"test": "pnpm dbml:validate"
   },
   "keywords": [],

@@ -1,4 +1,7 @@
+db-data/
 node_modules/
+
+.env
 
 *.api.key
 *.swp
