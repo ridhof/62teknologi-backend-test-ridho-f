@@ -79,9 +79,8 @@ Response:
 4. Calculate `distance` by given `latitude` and `longitude` parameter compared to business latitude and longitude data and filter by less than given radius parameter
 5. Sort by shortest distance
 6. Join with `business_categories` table to get business's categories
-7. Join with `business_transaction_types` table to get business's transaction types
-8. Count total businesses data based on given parameter
-9. Limit and offset by given limit and offset parameter
+7. Count total businesses data based on given parameter
+8. Limit and offset by given limit and offset parameter
 
 ### POST /
 
@@ -173,9 +172,8 @@ Response:
 Steps:
 
 1. Validate `categories`
-2. Insert into `business_transaction_types` table
-3. Insert into `business_categories` table
-4. Insert into `businesses` table
+2. Insert into `business_categories` table
+3. Insert into `businesses` table
 
 ### PUT /
 
@@ -268,7 +266,7 @@ Response:
 Steps:
 
 1. Validate `categories`
-2. Compare `categories` and `transaction-types`, then delete the unused data and add the new data
+2. Compare `categories`, then delete the unused data and add the new data
 3. Update `businesses` data with given id
 
 ### DEL /

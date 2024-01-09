@@ -21,6 +21,7 @@ Table businesses {
 	name varchar(255) [not null]
 	image_url varchar(255) [not null]
 	is_closed boolean [not null]
+	transaction_types transaction_type [not null, note: 'array of transaction_type']
 	url varchar(255) [unique, not null]
 	review_count int [not null, note: 'min: 0, max: 5']
 	rating float [not null, note: 'min: 0, max 5']
@@ -49,16 +50,6 @@ Enum price_type {
 	"$$$"
 	"$$$$"
 	"$$$$$"
-}
-
-Table business_transaction_types {
-	id bigint [pk, increment, unique]
-
-	business_id bigint [not null, ref: < businesses.id]
-	type transaction_type [not null]
-
-	created_date timestamp [not null, default: `now()`]
-	updated_date timestamp [not null, default: `now()`]
 }
 
 Enum transaction_type {
