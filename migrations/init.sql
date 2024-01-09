@@ -44,8 +44,8 @@ CREATE TABLE businesses (
 INSERT INTO businesses 
  (alias, name, image_url, transactions, latitude, longitude, price, location_address_1, city, zip_code, country, state, display_address, phone, display_phone)
 VALUES
- ('kismo-house', 'Kismo Coffee House Malang', 'https://i.imgur.com/NLf8tka.png', {'pickup'}, -7.9297124, 112.6035438, '$$$', 'Jl. Baiduri Sepah No.4, Tlogomas, Kec.Lowokwaru', NULL, NULL, 'Malang', '65144', 'Indonesia', 'Jawa Timur', {'Jl. Baiduri Sepah, Tlogomas', 'Kec.Lowokwaru, Malang'}, '081936051915', '(+62) 819-3605-1915'),
- ('common-grounds-fx-sudirman', 'Common Grounds Coffee - FX Sudirman', 'https://i.imgur.com/7CYPcx3.png', {'pickup', 'delivery'}, -6.2247853, 106.8042443, '$$$$', 'FX Lifestyle Center FI.02, Jl. Jenderal Sudirman, Jl. Pintu Satu Senayan', 'Jakarta Pusat', '10270', 'Indonesia', 'Jakarta', {'FX Lifestyle Centre FI.02', 'Gelora, Tanah Abang'}, '08170200131', '(+62) 817-020-0131');
+ ('kismo-house', 'Kismo Coffee House Malang', 'https://i.imgur.com/NLf8tka.png', '{"pickup"}', -7.9297124, 112.6035438, '$$$', 'Jl. Baiduri Sepah No.4, Tlogomas, Kec.Lowokwaru', 'Malang', '65144', 'id', 'ejv', '{"Jl. Baiduri Sepah, Tlogomas", "Kec.Lowokwaru, Malang"}', '081936051915', '(+62) 819-3605-1915'),
+ ('common-grounds-fx-sudirman', 'Common Grounds Coffee - FX Sudirman', 'https://i.imgur.com/7CYPcx3.png', '{"pickup", "delivery"}', -6.2247853, 106.8042443, '$$$$', 'FX Lifestyle Center FI.02, Jl. Jenderal Sudirman, Jl. Pintu Satu Senayan', 'Jakarta Pusat', '10270', 'id', 'jkt', '{"FX Lifestyle Centre FI.02", "Gelora, Tanah Abang"}', '08170200131', '(+62) 817-020-0131');
 
 CREATE TABLE categories (
 	id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -87,9 +87,6 @@ CREATE TABLE reviews (
 	rating INT NOT NULL,
 	user_id BIGINT NOT NULL REFERENCES users (id) ON DELETE RESTRICT,
 	business_id BIGINT NOT NULL REFERENCES businesses (id) ON DELETE RESTRICT,
-
-	business_id BIGINT NOT NULL REFERENCES businesses (id) ON DELETE CASCADE,
-	category_id BIGINT NOT NULL REFERENCES categories (id) ON DELETE CASCADE,
 
 	created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
