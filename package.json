@@ -4,18 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"dbml:render": "dbml-renderer -i ./documents/database.dbml -o ./documents/database.svg",
-	"dbml:validate": "dbdocs validate ./documents/database.dbml",
-	"docker:down": "rm -rf ./db-data && docker compose down -v",
-	"docker:up": "docker compose up -d",
-	"docker:psql": "docker exec -it bizsearch-database-1 psql -U postgres",
-	"test": "pnpm dbml:validate"
+    "dbml:render": "dbml-renderer -i ./documents/database.dbml -o ./documents/database.svg",
+    "dbml:validate": "dbdocs validate ./documents/database.dbml",
+    "docker:down": "rm -rf ./db-data && docker compose down -v",
+    "docker:up": "docker compose up -d",
+    "docker:psql": "docker exec -it bizsearch-database-1 psql -U postgres",
+    "test": "pnpm dbml:validate",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@softwaretechnik/dbml-renderer": "1.0.27",
-    "dbdocs": "0.8.4"
+    "dbdocs": "0.8.4",
+    "husky": "^8.0.0"
   }
 }
