@@ -9,6 +9,11 @@
     "docker:down": "rm -rf ./db-data && docker compose down -v",
     "docker:up": "docker compose up -d",
     "docker:psql": "docker exec -it bizsearch-database-1 psql -U postgres",
+	"app:server:install": "go get ./cmd/server",
+	"app:server:dev": "go run ./cmd/server",
+	"app:server:build": "go build ./cmd/server",
+	"app:server:start": "./server",
+	"app:server:test": "go test ./cmd/server",
     "test": "pnpm dbml:validate",
     "prepare": "husky install"
   },
