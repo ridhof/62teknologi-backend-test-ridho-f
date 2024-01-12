@@ -3,7 +3,7 @@ curl 'http://localhost:8080/business' \
 	--header "Content-Type: application/json" \
 	--request "PUT" \
 	--data '{
-		"id": 18,
+		"id": 3,
 		"alias": "test-4",
 		"price": "$",
 		"transactions": [

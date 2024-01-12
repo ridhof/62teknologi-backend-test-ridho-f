@@ -3,6 +3,7 @@ package queries
 import (
 	"database/sql"
 	"fmt"
+	"strings"
 
 	"github.com/lib/pq"
 
@@ -113,8 +114,8 @@ func CreateBusiness(db *sql.DB, newBusiness models.Business) (models.Business, e
 		newBusiness.LocationAddressThird,
 		newBusiness.City,
 		newBusiness.ZipCode,
-		newBusiness.Country,
-		newBusiness.State,
+		strings.ToLower(newBusiness.Country),
+		strings.ToLower(newBusiness.State),
 		pq.Array(newBusiness.DisplayAddress),
 		newBusiness.Phone,
 		newBusiness.DisplayPhone,
@@ -185,8 +186,8 @@ func UpdateBusiness(db *sql.DB, business models.Business) (models.Business, int,
 		business.LocationAddressThird,
 		business.City,
 		business.ZipCode,
-		business.Country,
-		business.State,
+		strings.ToLower(business.Country),
+		strings.ToLower(business.State),
 		pq.Array(business.DisplayAddress),
 		business.Phone,
 		business.DisplayPhone,
