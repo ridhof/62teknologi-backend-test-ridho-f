@@ -3,6 +3,7 @@ package http
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -16,7 +17,7 @@ func createBusiness(router *gin.Engine) {
 	business.GET("", getBusinesses)
 	business.POST("", postBusiness)
 	business.PUT("", updateBusiness)
-	// business.DELETE("/:id", deleteBusinessByID)
+	business.DELETE("/:id", deleteBusinessByID)
 }
 
 func getBusinesses(c *gin.Context) {
@@ -89,4 +90,28 @@ func updateBusiness(c *gin.Context) {
 	}
 
 	c.IndentedJSON(httpStatusCode, updated)
+}
+
+func deleteBusinessByID(c *gin.Context) {
+	db := database.GetInstance()
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.IndentedJSON(
+			http.StatusBadRequest,
+			gin.H{"message": fmt.Sprintf("%v", err)},
+		)
+		return
+	}
+
+	business, httpStatusCode, err := queries.DeleteBusinessByID(db, int64(id))
+	if err != nil {
+		c.IndentedJSON(
+			httpStatusCode,
+			gin.H{"message": fmt.Sprintf("%v", err)},
+		)
+		return
+	}
+
+	c.IndentedJSON(httpStatusCode, business)
 }

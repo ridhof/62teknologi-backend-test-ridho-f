@@ -233,3 +233,51 @@ func UpdateBusiness(db *sql.DB, business models.Business) (models.Business, int,
 
 	return updated, 200, nil
 }
+
+func DeleteBusinessByID(db *sql.DB, id int64) (models.Business, int, error) {
+	var business models.Business
+
+	result := db.QueryRow(
+		"DELETE FROM businesses WHERE id = $1 RETURNING *",
+		id,
+	)
+	if err := result.Scan(
+		&business.ID,
+
+		&business.Alias,
+		&business.Name,
+		&business.ImageUrl,
+		pq.Array(&business.Transactions),
+		&business.Latitude,
+		&business.Longitude,
+		&business.Price,
+		&business.LocationAddressFirst,
+		&business.LocationAddressSecond,
+		&business.LocationAddressThird,
+		&business.City,
+		&business.ZipCode,
+		&business.Country,
+		&business.State,
+		pq.Array(&business.DisplayAddress),
+		&business.Phone,
+		&business.DisplayPhone,
+
+		&business.CreatedDate,
+		&business.UpdatedDate,
+	); err != nil {
+		if err == sql.ErrNoRows {
+			return business, 404, fmt.Errorf(
+				"Could not find business with ID %v: %v",
+				id,
+				err,
+			)
+		}
+		return business, 400, fmt.Errorf(
+			"Could not delete business with ID %v: %v",
+			id,
+			err,
+		)
+	}
+
+	return business, 200, nil
+}
