@@ -35,6 +35,8 @@ type Business struct {
 	DisplayAddress []string `json:"display_address"`
 	Phone string `json:"phone"`
 	DisplayPhone string `json:"display_phone"`
+
+	Distance float32 `json:"distance"`
 	
 	CreatedDate string `json:"created_date"`
 	UpdatedDate string `json:"updated_date"`
@@ -70,6 +72,14 @@ type Review struct {
 	
 	CreatedDate string `json:"created_date"`
 	UpdatedDate string `json:"updated_date"`
+}
+
+type GetBusinessRequest struct {
+	Latitude float32 `json:"latitude"`
+	Longitude float32 `json:"longitude"`
+	Radius float32 `json:"radius"`
+	Limit int `json:"limit"`
+	Offset int `json:"offset"`
 }
 
 func (business Business) Validate() (error) {

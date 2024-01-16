@@ -45,7 +45,8 @@ INSERT INTO businesses
  (alias, name, image_url, transactions, latitude, longitude, price, location_address_1, city, zip_code, country, state, display_address, phone, display_phone)
 VALUES
  ('kismo-house', 'Kismo Coffee House Malang', 'https://i.imgur.com/NLf8tka.png', '{"pickup"}', -7.9297124, 112.6035438, '$$$', 'Jl. Baiduri Sepah No.4, Tlogomas, Kec.Lowokwaru', 'Malang', '65144', 'id', 'ejv', '{"Jl. Baiduri Sepah, Tlogomas", "Kec.Lowokwaru, Malang"}', '081936051915', '(+62) 819-3605-1915'),
- ('common-grounds-fx-sudirman', 'Common Grounds Coffee - FX Sudirman', 'https://i.imgur.com/7CYPcx3.png', '{"pickup", "delivery"}', -6.2247853, 106.8042443, '$$$$', 'FX Lifestyle Center FI.02, Jl. Jenderal Sudirman, Jl. Pintu Satu Senayan', 'Jakarta Pusat', '10270', 'id', 'jkt', '{"FX Lifestyle Centre FI.02", "Gelora, Tanah Abang"}', '08170200131', '(+62) 817-020-0131');
+ ('common-grounds-fx-sudirman', 'Common Grounds Coffee - FX Sudirman', 'https://i.imgur.com/7CYPcx3.png', '{"pickup", "delivery"}', -6.2247853, 106.8042443, '$$$$', 'FX Lifestyle Center FI.02, Jl. Jenderal Sudirman, Jl. Pintu Satu Senayan', 'Jakarta Pusat', '10270', 'id', 'jkt', '{"FX Lifestyle Centre FI.02", "Gelora, Tanah Abang"}', '08170200131', '(+62) 817-020-0131'),
+('ayam-goreng-gohyong-malaya', 'Ayam Goreng Gohyong Malaya', 'https://i.imgur.com/baTQvvR.png', '{"pickup"}', -6.1910484, 106.8281317, '$', 'Jl. Gereja Theresia, Gondangdia, Kec. Menteng', 'Jakarta Pusat', '10230', 'id', 'jkp', '{"Jl. Gereja Theresia", "Gondangdia, Kec. Menteng"}', '081316055766', '(+62) 813-1605-5766');
 
 CREATE TABLE categories (
 	id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -97,4 +98,5 @@ VALUES
  ('such a cozy, homey, clean, warming cafe with a good interior. good for wfc.', 4, 1, 1),
  ('one of cafe in malang that should be in the list with a homey concept.', 5, 2, 1),
  ('you cannot be uncertain with the coffee, surely delicious, and have promo. the barista are warming and so helpful.', 5, 1, 2),
- ('if you are visiting here, you should go upstair and take a seat at outdoor.', 5, 2, 2);
+ ('if you are visiting here, you should go upstair and take a seat at outdoor.', 5, 2, 2),
+ ('a viral place, has not yet opened on 4 PM. its located inside the Theresia Culinary', 4, 1, 3);

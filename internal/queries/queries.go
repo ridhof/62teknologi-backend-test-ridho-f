@@ -10,11 +10,32 @@ import (
 	"bizsearch/internal/models"
 )
 
-func GetBusinesses(db *sql.DB) ([]models.Business, error) {
+func GetBusinesses(db *sql.DB, request models.GetBusinessRequest) ([]models.Business, error) {
 	var businesses []models.Business
 
+	// limit, offset
+
 	rows, err := db.Query(
-		"SELECT * FROM businesses ORDER BY created_date DESC",
+		`SELECT * FROM (
+			SELECT b.*, (
+				6371 * acos(
+					cos( radians($1) ) * cos( radians(latitude) )
+					* cos(
+						radians(longitude) - radians($2)
+					) + sin( radians($1) ) * sin( radians(latitude) )
+				)
+			) as distance
+			FROM businesses as b
+			WHERE EXISTS (SELECT 1 FROM reviews as r WHERE r.business_id = b.id)
+		)
+		WHERE distance < $3
+		ORDER BY distance ASC
+		OFFSET $4 LIMIT $5`,
+		request.Latitude,
+		request.Longitude,
+		request.Radius,
+		request.Offset,
+		request.Limit,
 	)
 	if err != nil {
 		return businesses, fmt.Errorf("Unable to get businesses: %v", err)
@@ -46,6 +67,8 @@ func GetBusinesses(db *sql.DB) ([]models.Business, error) {
 
 			&business.CreatedDate,
 			&business.UpdatedDate,
+
+			&business.Distance,
 		); err != nil {
 			return businesses, fmt.Errorf("Unable to get businesses: %v", err)
 		}

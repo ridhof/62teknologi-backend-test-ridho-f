@@ -21,11 +21,49 @@ func createBusiness(router *gin.Engine) {
 }
 
 func getBusinesses(c *gin.Context) {
+	var request models.GetBusinessRequest
 	var businesses []models.Business
 	db := database.GetInstance()
 
 	var err error
-	businesses, err = queries.GetBusinesses(db)
+
+	var latitude float64
+	latitude, err = strconv.ParseFloat(c.DefaultQuery("latitude", "-6.2016627"), 32)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
+		return
+	}
+	request.Latitude = float32(latitude)
+
+	var longitude float64
+	longitude, err = strconv.ParseFloat(c.DefaultQuery("longitude", "106.7881607"), 32)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
+		return
+	}
+	request.Longitude = float32(longitude)
+
+	var radius float64
+	radius, err = strconv.ParseFloat(c.DefaultQuery("radius", "10"), 32)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
+		return
+	}
+	request.Radius = float32(radius)
+
+	request.Limit, err = strconv.Atoi(c.DefaultQuery("limit", "10"))
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
+		return
+	}
+
+	request.Offset, err = strconv.Atoi(c.DefaultQuery("offset", "0"))
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
+		return
+	}
+
+	businesses, err = queries.GetBusinesses(db, request)
 	if err != nil {
 		c.IndentedJSON(
 			http.StatusBadRequest, 
