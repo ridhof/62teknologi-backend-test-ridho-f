@@ -22,7 +22,7 @@ func createBusiness(router *gin.Engine) {
 
 func getBusinesses(c *gin.Context) {
 	var request models.GetBusinessRequest
-	var businesses []models.Business
+	var response models.GetBusinessResponse
 	db := database.GetInstance()
 
 	var err error
@@ -34,6 +34,7 @@ func getBusinesses(c *gin.Context) {
 		return
 	}
 	request.Latitude = float32(latitude)
+	response.Coordinates.Latitude = request.Latitude
 
 	var longitude float64
 	longitude, err = strconv.ParseFloat(c.DefaultQuery("longitude", "106.7881607"), 32)
@@ -42,6 +43,7 @@ func getBusinesses(c *gin.Context) {
 		return
 	}
 	request.Longitude = float32(longitude)
+	response.Coordinates.Longitude = request.Longitude
 
 	var radius float64
 	radius, err = strconv.ParseFloat(c.DefaultQuery("radius", "10"), 32)
@@ -50,20 +52,23 @@ func getBusinesses(c *gin.Context) {
 		return
 	}
 	request.Radius = float32(radius)
+	response.Coordinates.Radius = request.Radius
 
 	request.Limit, err = strconv.Atoi(c.DefaultQuery("limit", "10"))
 	if err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
 		return
 	}
+	response.Pagination.Limit = request.Limit
 
 	request.Offset, err = strconv.Atoi(c.DefaultQuery("offset", "0"))
 	if err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": fmt.Sprintf("%v", err)})
 		return
 	}
+	response.Pagination.Offset = request.Offset
 
-	businesses, err = queries.GetBusinesses(db, request)
+	response.Data, err = queries.GetBusinessesWithPagination(db, request)
 	if err != nil {
 		c.IndentedJSON(
 			http.StatusBadRequest, 
@@ -72,7 +77,18 @@ func getBusinesses(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, businesses)
+	var totalRow, totalPage int
+	totalRow, totalPage, err = queries.GetBusinessTotalPages(db, request)
+	if err != nil {
+		c.IndentedJSON(
+			http.StatusBadRequest,
+			gin.H{"message": fmt.Sprintf("%v", err)},
+		)
+	}
+	response.Pagination.Total = totalRow
+	response.Pagination.TotalPage = totalPage
+
+	c.IndentedJSON(http.StatusOK, response)
 }
 
 func postBusiness(c *gin.Context) {
@@ -98,7 +114,7 @@ func postBusiness(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(http.StatusCreated, business)
+	c.IndentedJSON(http.StatusCreated, gin.H{"data": business})
 }
 
 func updateBusiness(c *gin.Context) {
@@ -127,7 +143,7 @@ func updateBusiness(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(httpStatusCode, updated)
+	c.IndentedJSON(httpStatusCode, gin.H{"data": updated})
 }
 
 func deleteBusinessByID(c *gin.Context) {
@@ -151,5 +167,5 @@ func deleteBusinessByID(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(httpStatusCode, business)
+	c.IndentedJSON(httpStatusCode, gin.H{"data": business})
 }

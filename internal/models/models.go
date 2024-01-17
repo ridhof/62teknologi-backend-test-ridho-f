@@ -82,6 +82,21 @@ type GetBusinessRequest struct {
 	Offset int `json:"offset"`
 }
 
+type GetBusinessResponse struct {
+	Data []Business `json:"data"`
+	Pagination struct{
+		Total int `json:"total"`
+		TotalPage int `json:"total_page"`
+		Offset int `json:"offset"`
+		Limit int `json:"limit"`
+	} `json:"pagination"`
+	Coordinates struct{
+		Longitude float32 `json:"longitude"`
+		Latitude float32 `json:"latitude"`
+		Radius float32 `json:"radius"`
+	} `json:"coordinates"`
+}
+
 func (business Business) Validate() (error) {
 	var arrErr = []string{}
 

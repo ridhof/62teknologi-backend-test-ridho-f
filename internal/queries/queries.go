@@ -10,10 +10,47 @@ import (
 	"bizsearch/internal/models"
 )
 
-func GetBusinesses(db *sql.DB, request models.GetBusinessRequest) ([]models.Business, error) {
-	var businesses []models.Business
+func GetBusinessTotalPages(db *sql.DB, request models.GetBusinessRequest) (int, int, error) {
+	var totalRows int
 
-	// limit, offset
+	totalRowsResult := db.QueryRow(
+		`SELECT COUNT(id) as total_rows FROM (
+			SELECT b.*, (
+				6371 * acos(
+					cos( radians($1) ) * cos( radians(latitude) )
+					* cos(
+						radians(longitude) - radians($2)
+					) + sin( radians($1) ) * sin( radians(latitude) )
+				)
+			) as distance
+			FROM businesses as b
+			WHERE EXISTS (SELECT 1 FROM reviews as r WHERE r.business_id = b.id)
+		)
+		WHERE distance < $3`,
+		request.Latitude,
+		request.Longitude,
+		request.Radius,
+	)
+	if err := totalRowsResult.Scan(
+		&totalRows,
+	); err != nil {
+		return totalRows, totalRows, fmt.Errorf(
+			"Could not count total rows of businesses: %v",
+			err,
+		)
+	}
+
+	if totalRows % request.Limit == 0 {
+		return totalRows, totalRows / request.Limit, nil
+	}
+	return totalRows, (totalRows / request.Limit) + 1, nil
+}
+
+func GetBusinessesWithPagination(
+	db *sql.DB,
+	request models.GetBusinessRequest,
+) ([]models.Business, error) {
+	var businesses []models.Business
 
 	rows, err := db.Query(
 		`SELECT * FROM (
