@@ -13,8 +13,8 @@
 	"app:server:dev": "export DB_USERNAME=postgres DB_PASSWORD=DBPASSWORD DB_HOST=localhost:15432 DB_DATABASENAME=postgres && go run ./cmd/server",
 	"app:server:build": "go build ./cmd/server",
 	"app:server:start": "./server",
-	"app:server:test": "go test ./cmd/server",
-    "test": "pnpm dbml:validate",
+	"app:server:test": "export DB_USERNAME=postgres DB_PASSWORD=DBPASSWORD DB_HOST=localhost:15432 DB_DATABASENAME=postgres && go test ./cmd/server && go test ./internal/database",
+    "test": "pnpm dbml:validate && pnpm app:server:test",
     "prepare": "husky install"
   },
   "keywords": [],
