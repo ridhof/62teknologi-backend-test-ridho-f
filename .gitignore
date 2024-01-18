@@ -2,6 +2,7 @@ db-data/
 node_modules/
 
 .env
+server
 
 *.api.key
 *.swp

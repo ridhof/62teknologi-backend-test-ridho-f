@@ -16,8 +16,8 @@ An API server to manage and find businesses and reviews
 - [X] Design APIs
 - [X] Database Migrations
 - [X] Database Seeding
-- [ ] Database Query
-- [ ] APIs
+- [X] Database Query
+- [X] APIs
 
 ## Setup
 
@@ -33,7 +33,13 @@ An API server to manage and find businesses and reviews
 - `pnpm docker:up` to setup depedencies in docker such as postgresql database
 - `pnpm docker:down` to set down dependencies in docker such as postgresql database by deleting persistent data
 - `pnpm docker:psql` to access postgresql through psql cli
+- `pnpm app:server:install` to install golang depedencies
+- `pnpm app:server:dev` to run golang as a dev
+- `pnpm app:server:build` to build golang code
+- `pnpm app:server:start` to run the built code
+- `pnpm app:server:test` to test the golang code
 - `pnpm test` to test the whole application
+- `pnpm prepare` to setup husky
 
 ## Depedencies
 
